@@ -1,9 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
 
-<head>
-  <!-- <link rel="stylesheet" type="text/scss" href="../../assets/stylesheets/home.scss"> -->
-</head>
-<%# <div class=bg>
-</div> %>
+  <body>
+
 <div class="bg">
 <div class="container">
   <h1>GOATS.</h1>
@@ -11,6 +16,12 @@
 <div class="buttons">
     <%= link_to "I need a goat", listings_path, class: "btn-1" %>
     <%= link_to "I have a goat", new_listing_path, class: "btn-2" %>
-    <body class="home_page_layout">
 </div>
 </div>
+
+    <%= yield %>
+  </body>
+</html>
+
+
+

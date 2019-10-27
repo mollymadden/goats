@@ -74,9 +74,9 @@ class ListingsController < ApplicationController
     end
 
     def listing_params
-      result = params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill, :drop_off, :notes)
+      result = params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill, :drop_off, :notes, :image)
       # note result is a hash
-      result[:price] = result[:price].to_f * 100.0
+      result[:price] = result[:price].to_i * 100.0
       return result
     
     end

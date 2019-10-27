@@ -46,7 +46,7 @@
   <div class="text">
   Special
     <%= form.label :skill %><br/>
-    <%= select_tag(:skill, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skills_id ))%>
+    <%= form.select :skill, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skills_id )%>
   </div><br>
 
 

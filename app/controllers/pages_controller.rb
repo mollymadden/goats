@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:my_deposits] 
-  layout "home"
+  # layout "home"
 
   def home
     
