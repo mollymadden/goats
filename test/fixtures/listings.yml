@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  price: 1
+  description: MyText
+  gender: false
+  breed: MyString
+  skill: MyString
+  drop_off: false
+  notes: MyText
+  user: one
+
+two:
+  title: MyString
+  price: 1
+  description: MyText
+  gender: false
+  breed: MyString
+  skill: MyString
+  drop_off: false
+  notes: MyText
+  user: two

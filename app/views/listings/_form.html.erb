@@ -1,0 +1,83 @@
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="text">
+    <%= form.label :title %><br/>
+    <%= form.text_field :title, placeholder: "Goat's name?", :required => true %>
+  </div><br>
+
+  <div class="text">
+    <%= form.label :price %> per day <br/>
+    <%= form.text_field :price, :required => true, value: number_with_precision((listing.price||0)/100.0, :precision => 2) %>
+  </div><br>
+
+  <div class="text">
+    <%= form.label :description %><br/>
+    <%= form.text_area :description, placeholder: "Talk about your goat! Personality, star sign", :required => true %>
+  </div><br>
+
+    <div>
+        <%= form.label :gender %><br>
+        <% Listing.genders.keys.each do |gender| %>
+        <%= form.label gender %>
+        <%= form.radio_button :gender, gender %>
+
+        <% if gender == listing.gender %>
+        <% form.radio_button :gender, :checked => true %>
+        <% end %>
+        <% end %>
+    </div><br>
+
+    <div class="text">
+    <%= form.label :breed %><br/>
+    <%= form.text_field :breed %>
+  </div><br>
+
+  <div class="text">
+  Special
+    <%= form.label :skill %><br/>
+    <%= select_tag(:skill, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skills_id ))%>
+  </div><br>
+
+
+    <div>
+        <%= form.label :drop_off %> available? <br>
+        <% Listing.drop_offs.keys.each do |drop_off| %>
+        <%= form.label drop_off %>
+        <%= form.radio_button :drop_off, drop_off %>
+
+        <% if drop_off == listing.drop_off %>
+        <% form.radio_button :drop_off, :checked => true %>
+        <% end %>
+        <% end %>
+    </div><br>
+
+  <div class="text">
+    <%= form.label :notes %><br/>
+    <%= form.text_area :notes, placeholder: "Favourite treats, good with kids & pets, etc" %>
+  </div><br>
+
+
+  <div class="text">
+    <%= form.label :image %><br/>
+    <%= form.file_field :image, accept: 'image/png, image/gif, image/jpg, image/jpeg' %>
+  </div>
+
+
+  <br>
+  <div class="btn-1">
+    <%= form.submit %>
+  </div>
+
+<% end %>
+

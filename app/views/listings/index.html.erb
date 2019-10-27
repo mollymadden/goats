@@ -1,0 +1,28 @@
+<div class="bg4">
+</div>
+<p id="notice"><%= notice %></p>
+<div class="wrapper">
+  <div class="listings">
+    <div class="feed-grid">
+      <% @skills.each do | skill| %>
+        <br/>
+        <div class="skills"><hr><%= skill.title %><hr></div>
+        <br/>
+        <% @listings.each do |listing| %>
+          <div class="card">
+            <%=image_tag(listing.image )%>
+            <div class="info-center">
+              <div class="card-text"><%=link_to listing.title.to_s.split("_").join(" ") , listing_path(listing)%>
+                <div class="price"><br/>
+                  <p><%= number_to_currency(listing.price/100.0) %></p>
+                   </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
