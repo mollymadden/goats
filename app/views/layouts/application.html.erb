@@ -14,13 +14,12 @@
     <nav class="text-nav">
   <div>
     
-    <button type="button" class="btn btn-light"><%= link_to "Home", root_path %></button>
-    
-    <%= link_to "List A Goat | ", new_listing_path, class: "blackglossyCSSButtonbutton" %>
-    <%= link_to "See All Goats | ", listings_path, class: "blackglossyCSSButtonbutton" %>
-    <%= link_to "Rental History | ", my_deposits_path, class: "blackglossyCSSButtonbutton" %>
-    <%= link_to "About | ", about_path, class: "blackglossyCSSButtonbutton" %>
-    <%= link_to "Contact | ", contact_path, class: "blackglossyCSSButtonbutton" %>
+    <%= link_to "Home | ", root_path %>
+    <%= link_to "List A Goat | ", new_listing_path %>
+    <%= link_to "See All Goats | ", listings_path %>
+    <%= link_to "Rental History | ", my_deposits_path %>
+    <%= link_to "About | ", about_path %>
+    <%= link_to "Contact | ", contact_path %>
   </div>
   <div class="logout">
     <% if user_signed_in? %>
