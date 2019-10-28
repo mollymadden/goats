@@ -1,158 +1,51 @@
-<div class=bg4>
-</div>
-<p id="notice"><%= notice %></p>
-
-
-
-<div class="show-styles">
-<div class="img"><%= image_tag(@listing.image, width:400) %></div>
-
-<div>
-<%= @listing.title %>
-<%= @listing.title %></div>
-
-<div class= "subtext">
-     <div> <%= @listing.skill.title %></div>
-   <div><strong>Seller:</strong> <%= @listing.user.email %></div>
-   <br/>
-<div class= "subtext">
-   <div><strong>Description:</strong> <br/>  <%= @listing.description %>
-</div>
-</div>
-</div>
-<br/>
-
-
-<input type="hidden" id="listing-title" value=<%= @listing.title %> />
-
+<h1><%= @listing.title %></h1>
 
 <p>
-
+<%= image_tag @listing.image if @listing.image.attached? %>
 </p>
 
-<div class= "price">
-  <strong>Price:</strong><br/>
-  <%= hidden_field_tag(:price, (@listing.price / 100.0), id:"price") %>
-  <%=  number_to_currency(@listing.price/100.0) %>
-</div>
+<p>
+<strong>Description:</strong>
+<%= @listing.description %></p>
 
-<% if @listing.user != current_user %>
-<div class= "subtext">
-<strong>Quantity:</strong><br/>
-<%= number_field(:deposit, :quantity, in: 1..2000, step: 1, value: 1, id: 'qty') %>
-</div>
+<p>
+<strong>Price:</strong>
+<%= @listing.price %></p>
+
+<p>
+<strong>Gender:</strong>
+<%= @listing.gender %></p>
+
+<p>
+<strong>Breed:</strong>
+<%= @listing.breed %>
+</p>
+
+<p>
+<strong>Drop off available?</strong>
+<%= @listing.drop_off %></p>
+
+<p>
+<strong>Notes:</strong>
+<%= @listing.notes %></p>
+
+<p>
+<strong>Special Skill:</strong>
+<%= @listing.skill.title %></p>
 
 
-<div class= "subtext">
-<strong>Shipping Address:</strong><br/>
-  <input type="text" id="shippingUserInput" value="" />
-</div>
 
 
-<div class= "subtext">
-  <strong>Total Price:</strong>
-  $<span id="total"><%=  (@listing.price/100.0) %><span>
-</div>
 
-<%= form_tag charges_path, id:"stripe-form" do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
+<% if current_user.id == @listing.user_id %>
+        <td><%= link_to "Edit", edit_listing_path( @listing ) %></td>
+        <td><%= link_to "Delete", listing_path( @listing ) , method: :delete, data: {confirm: 'Are you super sure?'} %></td>
+        <td><%= link_to "Back", listings_path %></td>
+    <% else %>
+        <td>
+        <td>
     <% end %>
-  </article>
-
-  <%= hidden_field_tag(:listing_id, @listing.id) %>
-  <%= hidden_field_tag(:quantity, 1, id: "quantity") %>
-  <%= hidden_field_tag("shipping") %>
-
-  <input type="hidden" id="stripeToken" name="stripeToken" />
-  <input type="hidden" id="stripeEmail" name="stripeEmail" />
-  <input type="hidden" id="amountInCents" name="amountInCents" />
-
-  <input type="hidden" id="user-email" value=<%= current_user.email %> />
-
-  <br>
-  <button id="pay" class="btn-1"> Pay now </button>
-
-<% end %>
-
-<br>
-
-<% end %>
-
-<script>
-  var shippingUserInput = document.getElementById('shippingUserInput')
-
-  var shipping = document.getElementById('shipping')
-
-  var userEmail = document.getElementById('user-email')
-
-  var listingTitle = document.getElementById('listing-title')
 
 
-
-  var totalElement = document.getElementById('total')
-  //this comes from rails (@listing.price)
-  var price = document.getElementById('price')
-
-  var total = price.value
-  //hidden_field
-  var quantity = document.getElementById('quantity')
-  //number field
-  var qty = document.getElementById('qty')
-
-  qty.addEventListener('change', updateTotal)
-
-  shippingUserInput.addEventListener('change', updateShipping)
-
-  function updateShipping (event){
-    var shippingValue =  event.target.value
-    shipping.value = shippingValue
-  }
-
-  function updateTotal(event) {
-    var qtyVal = event.target.value
-    total = qtyVal * price.value
-    totalElement.innerText = total
-    quantity.value = qtyVal
-  }
-
-  var handler = StripeCheckout.configure({
-  key: "<%= Rails.configuration.stripe[:publishable_key] %>",
-  token: function(token) {
-    $("#stripeToken").val(token.id);
-    $("#stripeEmail").val(token.email);
-    //inserting price here
-    $("#amountInCents").val(Math.floor($("#price").val() * 100));
-    $("#stripe-form").submit();
-  }
-});
-
-
-$('#pay').on('click', function(e) {
-  var amountInCents = total*100;
-  var displayAmount = total;
-  // Open Checkout with further options
-
-  handler.open({
-    name: listingTitle.value,
-    description: 'Total Amount ($' + displayAmount + ')',
-    amount: amountInCents,
-    email: userEmail.value,
-    currency:"AUD",
-    locale:"auto"
-  });
-  e.preventDefault();
-});
-
-// Close Checkout on page navigation
-$(window).on('popstate', function() {
-  handler.close();
-});
-
-</script>
-</div>
-</div>
-</div>
+<%#= link_to "Edit", edit_listing_path( @listing ) %>
+<%#= link_to "Back", listings_path %>

@@ -45,8 +45,8 @@
 
   <div class="text">
   Special
-    <%= form.label :skill %><br/>
-    <%= form.select :skill, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skills_id )%>
+    <%= form.label :skill_id %><br/>
+    <%= form.select :skill_id, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skill_id )%>
   </div><br>
 
 

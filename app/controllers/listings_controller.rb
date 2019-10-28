@@ -21,16 +21,16 @@ class ListingsController < ApplicationController
 
   def edit
     puts current_user.id, @listing.user
-    authorize @listing
+    # authorize @listing
   end
 
 
   def create
-
     @listing = current_user.listings.new(listing_params)
+    # byebug
 
       if @listing.save
-      redirect_to @listing
+        redirect_to @listing
       else
         render :new
       end
@@ -51,10 +51,9 @@ class ListingsController < ApplicationController
 
 
   def destroy
-    authorize @listing
     @listing.destroy
     respond_to do |format|
-      format.html { redirect_to new_listing_path, notice: 'listing was successfully destroyed.' }
+      format.html { redirect_to new_listing_path, notice: 'listing was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -74,9 +73,9 @@ class ListingsController < ApplicationController
     end
 
     def listing_params
-      result = params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill, :drop_off, :notes, :image)
+      result = params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill_id, :drop_off, :notes, :image)
       # note result is a hash
-      result[:price] = result[:price].to_i * 100.0
+      result[:price] = result[:price].to_f * 100.0
       return result
     
     end
