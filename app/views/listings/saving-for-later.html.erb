@@ -79,3 +79,32 @@
       });
     });
 </script>
+
+    <!-- from listings index -->
+
+<div class="bg4">
+</div>
+<p id="notice"><%= notice %></p>
+<div class="wrapper">
+  <div class="listings">
+
+  <% @listings.each do |listing| %>
+    
+    <div class="card">
+
+        <%= link_to listing_path( listing ) do %>
+        <p><%= listing.title %></p>
+        <%=image_tag(listing.image, height: 200, width: 200) %>
+        <% end %>
+        <p><%= listing.breed %></p>
+        </div>
+        <div class="card-text">
+          <p><%= listing.skill.title %></p>
+        </div>
+    </div>
+    </div>
+  <% end %>
+  </div>
+
+</div>
+</div>

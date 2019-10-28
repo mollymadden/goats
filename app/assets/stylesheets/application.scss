@@ -15,7 +15,12 @@
  */
 
 body {
-  margin: 5px auto;
+  overflow-y: scroll;
+}
+
+nav {
+  display: block;
+  text-align: center;
 }
 
 @import 'bootstrap';
