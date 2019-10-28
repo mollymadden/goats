@@ -4,7 +4,7 @@ class Listing < ApplicationRecord
   has_one_attached :image
   has_many :deposits
 
-  enum gender: { female: 0, male: 1 }
-  enum drop_off: { yes: 0, no: 1 }
+  enum gender: { Female: 0, Male: 1 }
+  enum drop_off: { Yes: 0, No: 1 }
 
 end

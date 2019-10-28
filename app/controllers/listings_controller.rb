@@ -6,11 +6,11 @@ class ListingsController < ApplicationController
   
   def index
     @listings = Listing.all
-    @skills = Skill.all
   end
 
 
   def show
+    # raise
   end
 
 

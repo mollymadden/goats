@@ -1,7 +1,7 @@
 <h1><%= @listing.title %></h1>
 
 <p>
-<%= image_tag @listing.image if @listing.image.attached? %>
+<%= image_tag @listing.image if @listing.image.attached?%>
 </p>
 
 <p>
@@ -10,7 +10,9 @@
 
 <p>
 <strong>Price:</strong>
-<%= @listing.price %></p>
+<%= number_to_currency(@listing.price/100.0) %></p>
+
+
 
 <p>
 <strong>Gender:</strong>

@@ -13,7 +13,9 @@
 
     <nav class="text-nav">
   <div>
-    <%= link_to "Home | ", root_path , class: "blackglossyCSSButtonbutton" %>
+    
+    <button type="button" class="btn btn-light"><%= link_to "Home", root_path %></button>
+    
     <%= link_to "List A Goat | ", new_listing_path, class: "blackglossyCSSButtonbutton" %>
     <%= link_to "See All Goats | ", listings_path, class: "blackglossyCSSButtonbutton" %>
     <%= link_to "Rental History | ", my_deposits_path, class: "blackglossyCSSButtonbutton" %>

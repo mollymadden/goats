@@ -26,21 +26,21 @@
     <%= form.text_area :description, placeholder: "Talk about your goat! Personality, star sign", :required => true %>
   </div><br>
 
-    <div>
-        <%= form.label :gender %><br>
-        <% Listing.genders.keys.each do |gender| %>
-        <%= form.label gender %>
-        <%= form.radio_button :gender, gender %>
+  <div>
+      <%= form.label :gender %><br>
+      <% Listing.genders.keys.each do |gender| %>
+      <%= form.label gender %>
+      <%= form.radio_button :gender, gender %>
 
-        <% if gender == listing.gender %>
-        <% form.radio_button :gender, :checked => true %>
-        <% end %>
-        <% end %>
-    </div><br>
+      <% if gender == listing.gender %>
+      <% form.radio_button :gender, :checked => true %>
+      <% end %>
+      <% end %>
+  </div><br>
 
-    <div class="text">
-    <%= form.label :breed %><br/>
-    <%= form.text_field :breed %>
+  <div class="text">
+  <%= form.label :breed %><br/>
+  <%= form.text_field :breed %>
   </div><br>
 
   <div class="text">
@@ -50,17 +50,17 @@
   </div><br>
 
 
-    <div>
-        <%= form.label :drop_off %> available? <br>
-        <% Listing.drop_offs.keys.each do |drop_off| %>
-        <%= form.label drop_off %>
-        <%= form.radio_button :drop_off, drop_off %>
+  <div>
+      <%= form.label :drop_off %> available? <br>
+      <% Listing.drop_offs.keys.each do |drop_off| %>
+      <%= form.label drop_off %>
+      <%= form.radio_button :drop_off, drop_off %>
 
-        <% if drop_off == listing.drop_off %>
-        <% form.radio_button :drop_off, :checked => true %>
-        <% end %>
-        <% end %>
-    </div><br>
+      <% if drop_off == listing.drop_off %>
+      <% form.radio_button :drop_off, :checked => true %>
+      <% end %>
+      <% end %>
+  </div><br>
 
   <div class="text">
     <%= form.label :notes %><br/>
