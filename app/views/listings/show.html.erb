@@ -1,51 +1,67 @@
-<h1><%= @listing.title %></h1>
-
-<p>
-<%= image_tag @listing.image if @listing.image.attached?%>
-</p>
-
-<p>
-<strong>Description:</strong>
-<%= @listing.description %></p>
-
-<p>
-<strong>Price:</strong>
-<%= number_to_currency(@listing.price/100.0) %> per day</p>
-
-<p>
-<strong>Gender:</strong>
-<%= @listing.gender %></p>
-
-<p>
-<strong>Breed:</strong>
-<%= @listing.breed %>
-</p>
-
-<p>
-<strong>Drop off available?</strong>
-<%= @listing.drop_off %></p>
-
-<p>
-<strong>Notes:</strong>
-<%= @listing.notes %></p>
-
-<p>
-<strong>Special Skill:</strong>
-<%= @listing.skill.title %></p>
 
 
 
 
 
-<% if current_user.id == @listing.user_id %>
-        <td><%= link_to "Edit", edit_listing_path( @listing ) %></td>
-        <td><%= link_to "Delete", listing_path( @listing ) , method: :delete, data: {confirm: 'Are you super sure?'} %></td>
-        <td><%= link_to "Back", listings_path %></td>
-    <% else %>
-        <td>
-        <td>
-    <% end %>
+
+
 
 
 <%#= link_to "Edit", edit_listing_path( @listing ) %>
 <%#= link_to "Back", listings_path %>
+
+
+<div class="card mb-3" style="max-width: 100vw;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+        <%= image_tag @listing.image, class:"card-img" %>
+
+</div>
+    <div class="col-md-8">
+        <div class="card-body">
+        <h5 class="card-title"><h1><%= @listing.title %></h1></h5>
+            <p class="card-text">
+            
+            <p>
+            <strong>Description:</strong>
+            <%= @listing.description %></p>
+
+            <p>
+            <strong>Price:</strong>
+            <%= number_to_currency(@listing.price/100.0) %> per day</p>
+
+            <p>
+            <strong>Gender:</strong>
+            <%= @listing.gender %></p>
+
+            <p>
+            <strong>Breed:</strong>
+            <%= @listing.breed %>
+            </p>
+
+            <p>
+            <strong>Drop off available?</strong>
+            <%= @listing.drop_off %></p>
+
+            <p>
+            <strong>Notes:</strong>
+            <%= @listing.notes %></p>
+
+            <p>
+            <strong>Special Skill:</strong>
+            <%= @listing.skill.title %></p>
+
+            <button type="button" class="btn btn-success">Pay Deposit of <%= number_to_currency(@listing.price/100.0) %></button>
+
+    </div>
+    </div>
+
+        <% if current_user.id == @listing.user_id %>
+            <%= link_to "Edit |", edit_listing_path( @listing ) %>
+            <%= link_to "| Delete", listing_path( @listing ) , method: :delete, data: {confirm: 'Are you super sure?'} %>
+        <% end %>
+
+
+
+
+

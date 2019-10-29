@@ -108,3 +108,59 @@
 
 </div>
 </div>
+
+
+
+
+
+
+
+<h1><%= @listing.title %></h1>
+
+<p>
+<%= image_tag @listing.image if @listing.image.attached?%>
+</p>
+
+<p>
+<strong>Description:</strong>
+<%= @listing.description %></p>
+
+<p>
+<strong>Price:</strong>
+<%= number_to_currency(@listing.price/100.0) %> per day</p>
+
+<p>
+<strong>Gender:</strong>
+<%= @listing.gender %></p>
+
+<p>
+<strong>Breed:</strong>
+<%= @listing.breed %>
+</p>
+
+<p>
+<strong>Drop off available?</strong>
+<%= @listing.drop_off %></p>
+
+<p>
+<strong>Notes:</strong>
+<%= @listing.notes %></p>
+
+<p>
+<strong>Special Skill:</strong>
+<%= @listing.skill.title %></p>
+
+<p>
+<strong>Owned By:</strong>
+<%= @listing.user.email %></p>
+
+        <p class="card-text"><small class="text-muted">
+        <p><strong>Owned By:</strong>
+        <%= @listing.user.email %></p></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
