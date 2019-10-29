@@ -51,7 +51,32 @@
             <strong>Special Skill:</strong>
             <%= @listing.skill.title %></p>
 
-            <button type="button" class="btn btn-success">Pay Deposit of <%= number_to_currency(@listing.price/100.0) %></button>
+            <p>
+            <strong>Owned By:</strong>
+            <%= @listing.user.email %></p></small></p>
+
+
+
+
+            <button type="button" class="btn btn-primary btn-lg" data-stripe="payment">
+                Pay Deposit of <%= number_to_currency(@listing.price/100.0) %>
+            </button>
+
+                <script src="https://js.stripe.com/v3/"></script>
+
+                <script>
+                document
+                    .querySelector("[data-stripe='payment']")
+                    .addEventListener("click", () => {
+                    const stripe = Stripe(
+                        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+                    );
+
+                    stripe.redirectToCheckout({
+                        sessionId: "<%= @session_id %>"
+                    });
+                    });
+            </script>
 
     </div>
     </div>

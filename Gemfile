@@ -72,3 +72,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk-s3", "~> 1.52"
+
+gem "stripe", "~> 5.7"

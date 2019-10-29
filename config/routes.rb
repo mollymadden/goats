@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   get '/contact' , to: 'pages#contact'
   get '/about' , to: 'pages#about'
 
+  get "/deposits/success", to: "deposits#success"
+  post "deposits/webhook", to: "deposits#webhook"
+
 end

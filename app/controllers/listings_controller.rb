@@ -1,7 +1,11 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!  
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_listing, only: [:edit, :update, :destroy]
   before_action :set_select_options, only: [:new, :edit, :update]
+
+
+
 
   
   def index
@@ -10,7 +14,29 @@ class ListingsController < ApplicationController
 
 
   def show
-    # raise
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+          name: @listing.title,
+          # image: [@listing.image],
+          description: @listing.description,
+          amount: @listing.price,
+          currency: 'aud',
+          quantity: 1
+      }],
+      payment_intent_data: {
+          metadata: {
+              user_id: current_user.id,
+              listing_id: @listing.id
+          }
+      },
+      success_url: "#{root_url}deposits/success?userId=#{current_user.id}&listingId=#{@listing.id}",
+      cancel_url: "#{root_url}listings"
+  )
+
+    @session_id = session.id
+    end
   end
 
 
@@ -79,6 +105,24 @@ class ListingsController < ApplicationController
       return result
     
     end
-end
 
 
+
+    def set_user_listing
+    id = params[:id]
+    @listing = current_user.listings.find_by_id( id )
+
+    if @listing == nil
+      redirect_to listings_path
+    else
+    if @listing.price == nil
+      @listing.price = 0
+      end
+    end
+
+    end
+
+
+
+
+  
