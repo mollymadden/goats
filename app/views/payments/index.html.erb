@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>deposits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Address</th>
+      <th>listing</th>
+      <th>listing title</th>
+      <th>listing price</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @deposits.each do |deposit| %>
+      <tr>
+        <td><%= deposit.user %></td>
+        <td><%= deposit.address %></td>
+        <td><%= deposit.listing %></td>
+        <td><%= deposit.listing_title %></td>
+        <td><%= deposit.listing_price %></td>
+        <td><%= link_to 'Show', deposit %></td>
+        <td><%= link_to 'Edit', edit_deposit_path(deposit) %></td>
+        <td><%= link_to 'Destroy', deposit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Deposit', new_deposit_path %>

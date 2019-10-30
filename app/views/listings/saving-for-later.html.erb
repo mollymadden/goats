@@ -163,3 +163,29 @@
 
 
 
+
+
+
+  <div class="field">
+    <%=hidden_field_tag :listing_title, Listing.find(params[:listing_id]).title %>
+  </div>
+
+  <div class="field">
+    <%=hidden_field_tag :listing_price, Listing.find(params[:listing_id]).price %>
+  </div>
+
+
+
+
+
+    <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>

@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :charges
+  resources :deposits
   resources :listings
 
   root 'pages#home'
-  get '/my_deposits' , to: 'pages#my_deposits'
+  get '/deposits' , to: 'pages#deposits'
   get '/contact' , to: 'pages#contact'
   get '/about' , to: 'pages#about'
 
-  get "/deposits/success", to: "deposits#success"
-  post "deposits/webhook", to: "deposits#webhook"
+  get "/payments/success", to: "payments#success"
+  post "/payments/webhook", to: "payments#webhook"
 
 end

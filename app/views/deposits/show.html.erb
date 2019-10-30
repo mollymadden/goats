@@ -2,33 +2,56 @@
 
 <p>
   <strong>User:</strong>
-  <%= @deposit.user %>
+  <%= @deposit.user_email %>
 </p>
 
 <p>
-  <strong>Shipping address:</strong>
-  <%= @deposit.shipping_address %>
+  <strong>address:</strong>
+  <%= @deposit.address %>
 </p>
 
 <p>
   <strong>listing:</strong>
-  <%= @deposit.listing %>
+  <%#= @deposit.listing %>
 </p>
 
 <p>
-  <strong>listing title:</strong>
+  <strong>Listing Title:</strong>
   <%= @deposit.listing_title %>
 </p>
 
 <p>
-  <strong>listing price:</strong>
+  <strong>Price per day:</strong>
   <%= @deposit.listing_price %>
 </p>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @deposit.quantity %>
-</p>
+
 
 <%= link_to 'Edit', edit_deposit_path(@deposit) %> |
 <%= link_to 'Back', deposits_path %>
+
+
+
+            <button type="button" class="btn btn-primary btn-lg" data-stripe="payment">
+                Pay Deposit of <%= number_to_currency(@listing.price/100.0) %>
+            </button>
+
+                <script src="https://js.stripe.com/v3/"></script>
+
+                <script>
+                document
+                    .querySelector("[data-stripe='payment']")
+                    .addEventListener("click", () => {
+                    const stripe = Stripe(
+                        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+                    );
+
+                    stripe.redirectToCheckout({
+                        sessionId: "<%= @session_id %>"
+                    });
+                    });
+            </script>
+
+
+</div>
+</div>

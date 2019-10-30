@@ -3,11 +3,9 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :set_user_listing, only: [:edit, :update, :destroy]
   before_action :set_select_options, only: [:new, :edit, :update]
+  skip_before_action :authenticate_user!, only: [:index]
 
 
-
-
-  
   def index
     @listings = Listing.all
   end
@@ -31,7 +29,7 @@ class ListingsController < ApplicationController
               listing_id: @listing.id
           }
       },
-      success_url: "#{root_url}deposits/success?userId=#{current_user.id}&listingId=#{@listing.id}",
+      success_url: "#{root_url}payments/success?userId=#{current_user.id}&listingId=#{@listing.id}",
       cancel_url: "#{root_url}listings"
   )
 
@@ -95,6 +93,8 @@ class ListingsController < ApplicationController
      @select_options = []
      Skill.all.each_with_index do |skill, index| 
        @select_options.push([skill.title,index+1]) 
+
+
      end 
     end
 

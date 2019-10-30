@@ -1,12 +1,12 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!, only: [:my_deposits] 
+  before_action :authenticate_user!, only: [:deposits] 
   # layout "home"
 
   def home
     
   end
 
-  def my_deposits
+  def deposits
     @deposits = Deposit.where(user:current_user)
   end
 

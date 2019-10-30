@@ -10,23 +10,33 @@
     </div>
   <% end %>
 
-  <p>Email: <%=current_user.email %></p>
+  <p>Hi <%=current_user.email %>, please fill the form below to continue with your purchase. </p>
 
   <div class="field">
     <%=hidden_field_tag :user, current_user %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+    <%= form.label :shipping_address %>
+    <%= form.text_field :shipping_address %>
   </div>
 
   <div class="field">
     <%=hidden_field_tag :listing_id, params[:listing_id] %>
   </div>
 
+  <div class="field">
+    <%=hidden_field_tag :listing_title, Listing.find(params[:listing_id]).title %>
+  </div>
 
+  <div class="field">
+    <%=hidden_field_tag :listing_price, Listing.find(params[:listing_id]).price %>
+  </div>
 
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
