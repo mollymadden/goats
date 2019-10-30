@@ -1,9 +1,10 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!  
+  skip_before_action :authenticate_user!, only: [:index]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :set_user_listing, only: [:edit, :update, :destroy]
   before_action :set_select_options, only: [:new, :edit, :update]
-  skip_before_action :authenticate_user!, only: [:index]
+
 
 
   def index
@@ -35,8 +36,7 @@ class ListingsController < ApplicationController
 
     @session_id = session.id
     end
-  end
-
+  
 
   def new
     @listing = Listing.new
@@ -83,46 +83,35 @@ class ListingsController < ApplicationController
   end
 
   private
-   
     def set_listing
       @listing = Listing.find(params[:id])
     end
 
     def set_select_options
-
-     @select_options = []
-     Skill.all.each_with_index do |skill, index| 
-       @select_options.push([skill.title,index+1]) 
-
-
-     end 
-    end
+      @select_options = []
+      Skill.all.each_with_index do |skill, index| 
+        @select_options.push([skill.title,index+1]) 
+      end
+    end 
 
     def listing_params
       result = params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill_id, :drop_off, :notes, :image, :user_id)
       # note result is a hash
       result[:price] = result[:price].to_f * 100.0
       return result
-    
     end
 
 
 
     def set_user_listing
-    id = params[:id]
-    @listing = current_user.listings.find_by_id( id )
+      id = params[:id]
+      @listing = current_user.listings.find_by_id( id )
 
-    if @listing == nil
-      redirect_to listings_path
-    else
-    if @listing.price == nil
-      @listing.price = 0
+      if @listing == nil
+        redirect_to listings_path
+      elsif @listing.price == nil
+        @listing.price = 0
       end
-    end
 
     end
-
-
-
-
-  
+  end
