@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/deposits' , to: 'pages#deposits'
   get '/contact' , to: 'pages#contact'
   get '/about' , to: 'pages#about'
+  get '/filter' , to: 'pages#filter'
 
   get "/payments/success", to: "payments#success"
   post "/payments/webhook", to: "payments#webhook"
