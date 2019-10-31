@@ -3,4 +3,4 @@
 
 <%= render 'form', deposit: @deposit, listing: @listing %>
 
-<%= link_to 'Back to all goats', listings_path %>
+<small><%= link_to "Back to #{@listing.title} ", listing_path(@listing) %></small>
