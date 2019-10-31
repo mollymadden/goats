@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users do
+    resources :deposits, only: [:index, :show]
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :deposits
-  resources :listings
+  resources :listings do
+    resources :deposits
+  end
+
 
   root 'pages#home'
   get '/deposits' , to: 'pages#deposits'

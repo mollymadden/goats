@@ -1,12 +1,5 @@
 
 
-
-
-
-
-
-
-
 <%#= link_to "Edit", edit_listing_path( @listing ) %>
 <%#= link_to "Back", listings_path %>
 
@@ -55,8 +48,7 @@
             <strong>Owned By:</strong>
             <%= @listing.user.email %></p></small></p>
 
-            <%= link_to 'Book Goat', new_deposit_path, class: "btn btn-success"%>
-
+            <%= link_to 'Book Goat', new_listing_deposit_path(@listing), class: "btn btn-success"%>
 
     </div>
     </div>

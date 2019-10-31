@@ -10,11 +10,36 @@ class DepositsController < ApplicationController
     # GET /deposits/1
     # GET /deposits/1.json
     def show
+
     end
   
     # GET /deposits/new
     def new
       @deposit = Deposit.new
+      @listing = Listing.find(params[:listing_id])
+
+      session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+          name: @listing.title,
+          # image: [@listing.image],
+          description: @listing.description,
+          amount: @listing.price,
+          currency: 'aud',
+          quantity: 1
+      }],
+      payment_intent_data: {
+          metadata: {
+              user_id: current_user.id,
+              listing_id: @listing.id
+          }
+      },
+      success_url: "#{root_url}payments/success?userId=#{current_user.id}&listingId=#{@listing.id}",
+      cancel_url: "#{root_url}listings"
+  )
+    @session_id = session.id
+
     end
   
     # GET /deposits/1/edit
@@ -26,40 +51,17 @@ class DepositsController < ApplicationController
     def create
       @deposit = current_user.deposits.new(deposit_params)
       @deposit = Listing.deposits.new(deposit_params)
-  
-      respond_to do |format|
-        if @deposit.save
-          format.html { redirect_to @deposit, notice: 'deposit was successfully created.' }
-          format.json { render :show, status: :created, location: @deposit }
-        else
-          format.html { render :new }
-          format.json { render json: @deposit.errors, status: :unprocessable_entity }
-        end
-      end
     end
   
     # PATCH/PUT /deposits/1
     # PATCH/PUT /deposits/1.json
     def update
-      respond_to do |format|
-        if @deposit.update(deposit_params)
-          format.html { redirect_to @deposit, notice: 'deposit was successfully updated.' }
-          format.json { render :show, status: :ok, location: @deposit }
-        else
-          format.html { render :edit }
-          format.json { render json: @deposit.errors, status: :unprocessable_entity }
-        end
-      end
     end
   
     # DELETE /deposits/1
     # DELETE /deposits/1.json
     def destroy
       @deposit.destroy
-      respond_to do |format|
-        format.html { redirect_to deposits_url, notice: 'deposit was successfully destroyed.' }
-        format.json { head :no_content }
-      end
     end
   
     private
@@ -82,7 +84,7 @@ class DepositsController < ApplicationController
       else
       if @listing.price == nil
         @listing.price = 0
-        end
+      end
       end
     end
 end

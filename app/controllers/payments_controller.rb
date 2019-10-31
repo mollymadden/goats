@@ -7,11 +7,11 @@ class PaymentsController < ApplicationController
   end
 
   def webhook
-    payment_id = params[:data] [:object] [:payment_intent]
-    payment = Stripe::PaymentIntent.retrieve( payment_id )
+    deposit_id = params[:data] [:object] [:payment_intent]
+    deposit = Stripe::PaymentIntent.retrieve( deposit_id )
 
-    listing_id = payment.metadata.listing_id
-    user_id = payment.metadata.user_id
+    listing_id = deposit.metadata.listing_id
+    user_id = deposit.metadata.user_id
     
     p "listing id = " + listing_id
     p "user id = " + user_id
