@@ -40,6 +40,8 @@ class DepositsController < ApplicationController
   )
     @session_id = session.id
 
+
+
     end
   
     # GET /deposits/1/edit
@@ -51,6 +53,15 @@ class DepositsController < ApplicationController
     def create
       @deposit = current_user.deposits.new(deposit_params)
       @deposit = Listing.deposits.new(deposit_params)
+
+      @deposit = Deposit.new
+      @deposit.user = current_user
+      @deposit.listing = @listing
+      @deposit.listing_title = @listing.title
+      @deposit.listing_price = @listing.price
+      @deposit.address = params[:address]
+      @deposit.save
+
     end
   
     # PATCH/PUT /deposits/1

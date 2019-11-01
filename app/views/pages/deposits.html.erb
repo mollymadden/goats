@@ -1,4 +1,4 @@
-<div class= "deposits-styles">
+
 <div> Goat Rental History </div>
   <% if @deposits.size != 0 %>
     <table class="table-striped">
@@ -6,8 +6,8 @@
         <tr>
           <th>Date</th>
           <th>Time</th>
-          <th>Listing title</th>
-          <th>Daily price</th>
+          <th>Listing Title</th>
+          <th>Daily Price</th>
           <th>Address</th>
         </tr>
       </thead>
@@ -16,8 +16,8 @@
           <tr>
             <td><%= deposit.created_at.localtime.strftime('%d-%m-%Y') %></td>
             <td><%= deposit.created_at.localtime.strftime('%H:%M') %></td>
-            <td><%= deposit.listing_title %></td>
-            <td><%= number_to_currency(deposit.listing_price.to_i/100.0) %></td>
+            <td><%#= deposit.listing_title %></td>
+            <td><%#= number_to_currency(deposit.listing_price.to_i/100.0) %></td>
             <td><%= deposit.address %></td>
           </tr>
         <% end %>

@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!, only: [:deposits] 
+before_action :authenticate_user!, only: [:deposits] 
+
   # layout "home"
 
   def home
-    
   end
 
   def deposits
@@ -13,7 +13,5 @@ class PagesController < ApplicationController
   def about
   end
   
-  def contact
-  end
 
 end

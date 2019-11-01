@@ -3,11 +3,18 @@
 <%#= link_to "Edit", edit_listing_path( @listing ) %>
 <%#= link_to "Back", listings_path %>
 
-
 <div class="card mb-3" style="max-width: 100vw;">
+
+    <% if current_user.id == @listing.user_id %>
+    <div class="alert alert-danger">This is your goat</div>
+    <% end %>
+
   <div class="row no-gutters">
     <div class="col-md-4">
+    <div class="cardy">
+
         <%= image_tag @listing.image, class:"card-img" %>
+    </div>
 
 </div>
     <div class="col-md-8">
@@ -48,7 +55,10 @@
             <strong>Owned By:</strong>
             <%= @listing.user.email %></p></small></p>
 
+            <% if current_user.id == @listing.user_id %>
+            <% else %>
             <%= link_to 'Book Goat', new_listing_deposit_path(@listing), class: "btn btn-success"%>
+            <% end %>
             <small><%= link_to "Back to all goats", listings_path %></small>
 
     </div>
