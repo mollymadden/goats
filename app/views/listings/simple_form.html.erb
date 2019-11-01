@@ -1,4 +1,4 @@
-<%= simple_form_for @listing, url: listings_path,
+<%= simple_form_for @listing, url: new_listing_path,
   wrapper: :horizontal_form,
   wrapper_mappings: {
     boolean:       :horizontal_boolean,
@@ -23,14 +23,16 @@
 
   <%= f.input :breed, :required => true %>
 
-  <%= f.input :gender, as: :radio_buttons, collection: Listing.genders.keys, :required => true %>
+  <%= f.input :gender, as: :radio_buttons, :required => true %>
 
   <%= f.input :notes, :required => true %>
 
-  <%= f.input :drop_off, as: :radio_buttons, collection: Listing.drop_offs.keys, :required => true %>
+  <%= f.input :drop_off, as: :radio_buttons, :required => true %>
 
-  <%= f.input :image, as: :file %>
+  <%= f.input :image, as: :file, input_html: { accept: 'image/png, image/gif, image/jpg, image/jpeg' } %>
+
 
   <%= f.button :submit, class: "btn-primary" %>
+
 
 <% end %>

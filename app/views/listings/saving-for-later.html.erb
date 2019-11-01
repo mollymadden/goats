@@ -185,3 +185,15 @@
       </ul>
     </div>
   <% end %>
+
+
+
+    <div class="text">
+    <%= form.label :title, class:"control-label" %><br/>
+    <%= form.text_field :title, placeholder: "Goat's name?", :required => true %>
+
+
+    <%= form.label :title, class:"control-label col-sm-2" %><br/>
+        <div class="col-sm-10">
+    <%= form.text_field :title, placeholder: "Goat's name?", class:"form-control", :required => true %>
+        </div>

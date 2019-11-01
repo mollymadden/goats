@@ -10,7 +10,6 @@ class DepositsController < ApplicationController
     # GET /deposits/1
     # GET /deposits/1.json
     def show
-
     end
   
     # GET /deposits/new

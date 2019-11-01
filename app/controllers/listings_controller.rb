@@ -45,7 +45,7 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to new_listing_path, notice: 'listing was successfully updated.' }
+        format.html { redirect_to listing_path, notice: "#{@listing.title} has been updated." }
         format.json { render :show, status: :ok, location: @listing }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
   def destroy
     @listing.destroy
     respond_to do |format|
-      format.html { redirect_to new_listing_path, notice: 'listing was successfully deleted.' }
+      format.html { redirect_to listings_path, notice: "#{@listing.title} has been deleted." }
       format.json { head :no_content }
     end
   end
@@ -77,10 +77,7 @@ class ListingsController < ApplicationController
     end 
 
     def listing_params
-      result = params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill_id, :drop_off, :notes, :image, :user_id)
-      # note result is a hash
-      result[:price] = result[:price].to_f * 100.0
-      return result
+      params.require(:listing).permit(:title, :price, :description, :gender, :breed, :skill_id, :drop_off, :notes, :image, :user_id)
     end
 
 
