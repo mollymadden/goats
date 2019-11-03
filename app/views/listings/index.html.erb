@@ -13,8 +13,9 @@
   <div class="container">
     <h4><b><%= link_to listing_path( listing ) do %>
         <%= listing.title %><% end %></b></h4>
-        <p><%= listing.breed %> Goat</p>
-   <p><small><%= listing.skill.title %></small></p>
+        <%= listing.breed %> Goat<br>
+         $<%= listing.price %> per day<br>
+   <small><%= listing.skill.title %></small>
   </div>
 </div>
 

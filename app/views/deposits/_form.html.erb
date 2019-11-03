@@ -22,7 +22,7 @@
 
   <p>
     <strong>Price per day:</strong>
-    $<%= @listing.price/100 %>
+    $<%= @listing.price %>
   </p>
 
   <div class="field">
@@ -42,7 +42,7 @@
 <% end %>
 
     <button type="button" class="btn btn-info btn-sm" data-stripe="payment">
-        Pay Deposit of $<%= @listing.price/100 %>
+        Pay Deposit of $<%= @listing.price %>
     </button>
 
     <script src="https://js.stripe.com/v3/"></script>

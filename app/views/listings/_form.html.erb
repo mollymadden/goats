@@ -1,36 +1,82 @@
-<%= simple_form_for @listing, url: listings_path,
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    boolean:       :horizontal_boolean,
-    check_boxes:   :horizontal_collection,
-    date:          :horizontal_multi_select,
-    datetime:      :horizontal_multi_select,
-    file:          :horizontal_file,
-    radio_buttons: :horizontal_collection,
-    range:         :horizontal_range,
-    time:          :horizontal_multi_select
-  } do |f| %>
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
 
-  <%= f.error_notification %>
+      <ul>
+      <% listing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <%= f.input :title, placeholder: "What is your goat's name?", :required => true %>
+  <div class="text">
+    <%= form.label :title %><br/>
+    <%= form.text_field :title, placeholder: "Goat's name?", :required => true %>
+  </div><br>
 
-  <%= f.input :description, placeholder: "Talk about your goat! Personality, star sign", :required => true %>
+  <div class="text">
+    <%= form.label :price %> per day <br/>
+    <%= form.text_field :price, :required => true, value: number_with_precision((listing.price||0)/100.0, :precision => 2) %>
+  </div><br>
 
-  <%= f.input :price, :required => true %>
+  <div class="text">
+    <%= form.label :description %><br/>
+    <%= form.text_area :description, placeholder: "Talk about your goat! Personality, star sign", :required => true %>
+  </div><br>
 
-  <%= f.input :skill_id, collection: Skill.all, :required => true %>
+  <div>
+      <%= form.label :gender %><br>
+      <% Listing.genders.keys.each do |gender| %>
+      <%= form.label gender %>
+      <%= form.radio_button :gender, gender %>
 
-  <%= f.input :breed, :required => true %>
+      <% if gender == listing.gender %>
+      <% form.radio_button :gender, :checked => true %>
+      <% end %>
+      <% end %>
+  </div><br>
 
-  <%= f.input :gender, as: :radio_buttons, collection: Listing.genders.keys, :required => true %>
+  <div class="text">
+  <%= form.label :breed %><br/>
+  <%= form.text_field :breed %>
+  </div><br>
 
-  <%= f.input :notes, :required => true %>
+  <div class="text">
+  Special
+    <%= form.label :skill_id %><br/>
+    <%= form.select :skill_id, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skill_id )%>
+  </div><br>
 
-  <%= f.input :drop_off, as: :radio_buttons, collection: Listing.drop_offs.keys, :required => true %>
 
-  <%= f.input :image, as: :file %>
+  <div>
+      <%= form.label :drop_off %> available? <br>
+      <% Listing.drop_offs.keys.each do |drop_off| %>
+      <%= form.label drop_off %>
+      <%= form.radio_button :drop_off, drop_off %>
 
-  <%= f.button :submit, class: "btn-primary" %>
+      <% if drop_off == listing.drop_off %>
+      <% form.radio_button :drop_off, :checked => true %>
+      <% end %>
+      <% end %>
+  </div><br>
+
+  <div class="text">
+    <%= form.label :notes %><br/>
+    <%= form.text_area :notes, placeholder: "Favourite treats, good with kids & pets, etc" %>
+  </div><br>
+
+
+  <div class="text">
+    <%= form.label :image %><br/>
+    <%= form.file_field :image, accept: 'image/png, image/gif, image/jpg, image/jpeg' %>
+  </div>
+
+
+  <br>
+  <div class="btn-1">
+    <%= form.submit %>
+  </div>
 
 <% end %>

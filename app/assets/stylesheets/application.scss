@@ -17,6 +17,7 @@
 body {
   overflow-y: scroll;
   overflow-x: hidden;
+  color: green;
 }
 
 nav {
@@ -39,6 +40,8 @@ nav {
 .logout {
   font-size: 10px;
 }
+
+
 
 @import 'bootstrap';
 
