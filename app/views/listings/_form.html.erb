@@ -18,7 +18,7 @@
 
   <div class="text">
     <%= form.label :price %> per day <br/>
-    <%= form.text_field :price, :required => true, value: number_with_precision((listing.price||0)/100.0, :precision => 2) %>
+    <%= form.text_field :price, :required => true, value: number_with_precision(listing.price, :precision => 2) %>
   </div><br>
 
   <div class="text">
