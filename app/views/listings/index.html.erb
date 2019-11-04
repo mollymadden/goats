@@ -1,4 +1,7 @@
-
+<%= form_tag listings_path, :method => 'get' do %>
+   <%= select_tag(:skill_id, options_for_select(Skill.order(:title).pluck(:title, :id) ,:selected =>params[:option]), onchange: 'this.form.submit();', class: "form-control custom-select" , include_blank: true  )%>
+ <% end %>
+ 
 
 <div class="group">
 

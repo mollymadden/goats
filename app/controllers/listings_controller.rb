@@ -8,8 +8,10 @@ class ListingsController < ApplicationController
 
 
 
+
   def index
     @listings = Listing.all.order('updated_at DESC')
+    @listings = @listings.where(skill_id: params[:skill_id]) if params[:skill_id].present?
 
   end
 

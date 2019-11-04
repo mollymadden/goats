@@ -3,9 +3,13 @@ Rails.application.routes.draw do
     resources :deposits, only: [:index, :show]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
+
   resources :listings do
     resources :deposits
   end
+
 
 
   root 'pages#home'
@@ -18,3 +22,4 @@ Rails.application.routes.draw do
   post "/payments/webhook", to: "payments#webhook"
 
 end
+

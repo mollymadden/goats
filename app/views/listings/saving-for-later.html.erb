@@ -197,3 +197,14 @@
         <div class="col-sm-10">
     <%= form.text_field :title, placeholder: "Goat's name?", class:"form-control", :required => true %>
         </div>
+
+
+
+
+
+
+
+<%= form_tag "/skills", method: :get do %>
+  <%= select_tag :skill_id, options_for_select( Skill.all.collect { |u| [u.title, u.id] })  %>
+  <%= submit_tag 'Apply Filter' %>
+<% end %>

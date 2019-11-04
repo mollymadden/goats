@@ -8,7 +8,10 @@ ruby '2.5.3'
 gem 'devise'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
-gem 'simple_form'
+gem 'has_scope'
+gem 'filterrific'
+
+
 
 
 
