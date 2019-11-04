@@ -1,28 +1,39 @@
 
 <div> Goat Rental History </div>
-  <% if @deposits.size != 0 %>
-    <table class="table-striped">
-      <thead>
+<div class="container">
+
+
+  <table class="table table-striped table-responsive d-xl-table">
+    <thead>
+      <tr>
+        <th colspan="7" class="border-top-0"><h2>As Renter</h2></th>
+      </tr>
+      <tr>
+        <th style="min-width: 200px;">Listing</th>
+        <th style="min-width: 110px;">Owner</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @deposits.each_with_index do |deposit, i| %>
         <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Listing Title</th>
-          <th>Daily Price</th>
-          <th>Address</th>
+          <td><%= link_to deposit.listing.title, deposit.listing %></td>
+          <td><%#= link_to deposit.listing.email, deposit.listing.user %></td>
+
+          <td>
+            <label class='actions-label' for='<%= "renter-toggle#{i}" %>'>Actions ▼</label>
+            <input type='checkbox' id='<%= "renter-toggle#{i}" %>' class="menu-toggle">
+
+            <div class='menu-panel'>
+              <div class='arrow'></div>
+              <a href='mailto:<%= deposit.listing.user.email %>'>
+                Contact Lister
+              </a>
+            </div>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @deposits.each do |deposit| %>
-          <tr>
-            <td><%= deposit.created_at.localtime.strftime('%d-%m-%Y') %></td>
-            <td><%= deposit.created_at.localtime.strftime('%H:%M') %></td>
-            <td><%#= deposit.listing_title %></td>
-            <td><%#= number_to_currency(deposit.listing_price.to_i/100.0) %></td>
-            <td><%= deposit.address %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+      <% end %>
+    </tbody>
 
   

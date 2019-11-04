@@ -50,17 +50,44 @@ class DepositsController < ApplicationController
     # POST /deposits
     # POST /deposits.json
     def create
-      @deposit = current_user.deposits.new(deposit_params)
-      @deposit = Listing.deposits.new(deposit_params)
+      begin
+        # Create customer if neeeded
+        if current_user.stripe_cust_id.nil?
+          customer = Stripe::Customer.create(
+            :email => params[:stripeEmail],
+          )
+          # Save stripe customer id
+          current_user.stripe_cust_id = customer.id
+          current_user.save
+        end
+        # Update source
+        customer = Stripe::Customer.retrieve(current_user.stripe_cust_id)
+        customer.source = params[:stripeToken]
+        customer.save
+  
+        # Create stripe charge for given date range
+        charge = Stripe::Charge.create(
+          :customer    => current_user.stripe_cust_id,
+          :amount      => @amount,
+          :description => "deposit for listing id: #{@listing.id}",
+          :currency    => 'aud'
+        )
+        # Create deposit
+        @deposit = Deposit.new(deposit_params)
+        @deposit.user_id = current_user.id
+        @deposit.listing_id = @listing.id
+        @deposit.deposit_date = Date.today
 
-      @deposit = Deposit.new
-      @deposit.user = current_user
-      @deposit.listing = @listing
-      @deposit.listing_title = @listing.title
-      @deposit.listing_price = @listing.price
-      @deposit.address = params[:address]
-      @deposit.save
-
+        # Check if successfully saves to database
+        if @deposit.save
+          redirect_to deposits_path, notice: 'deposit was successfully created.'
+        else
+          redirect_to new_listing_deposit_path(@listing), alert: 'deposit failed.'
+        end
+  
+      rescue Stripe::CardError => e
+        redirect_to new_listing_deposit_path(@listing), alert: e.message
+      end
     end
   
     # PATCH/PUT /deposits/1
