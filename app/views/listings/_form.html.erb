@@ -11,72 +11,74 @@
     </div>
   <% end %>
 
+<div class=formy>
   <div class="text">
-    <%= form.label :title %><br/>
+    <strong><%= form.label :title %><br/></strong>
     <%= form.text_field :title, placeholder: "Goat's name?", :required => true %>
   </div><br>
 
   <div class="text">
-    <%= form.label :price %> per day <br/>
+    <strong><%= form.label :price %> per day <br/></strong>
     <%= form.text_field :price, :required => true, value: number_with_precision(listing.price, :precision => 2) %>
   </div><br>
 
   <div class="text">
-    <%= form.label :description %><br/>
+    <strong><%= form.label :description %><br/>
     <%= form.text_area :description, placeholder: "Talk about your goat! Personality, star sign", :required => true %>
   </div><br>
 
   <div>
-      <%= form.label :gender %><br>
+      <strong><%= form.label :gender %><br></strong>
       <% Listing.genders.keys.each do |gender| %>
       <%= form.label gender %>
-      <%= form.radio_button :gender, gender %>
+      <%= form.radio_button :gender, gender %><p>
 
       <% if gender == listing.gender %>
-      <% form.radio_button :gender, :checked => true %>
+      <% form.radio_button :gender, :checked => true %></p>
       <% end %>
       <% end %>
   </div><br>
 
   <div class="text">
-  <%= form.label :breed %><br/>
+  <strong><%= form.label :breed %><br/></strong>
   <%= form.text_field :breed %>
   </div><br>
 
   <div class="text">
-  Special
-    <%= form.label :skill_id %><br/>
+  <strong>Special
+    <%= form.label :skill_id %><br/></strong>
     <%= form.select :skill_id, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skill_id )%>
   </div><br>
 
 
   <div>
-      <%= form.label :drop_off %> available? <br>
-      <% Listing.drop_offs.keys.each do |drop_off| %>
+      <strong><%= form.label :drop_off %> available? <br></strong>
+    <% Listing.drop_offs.keys.each do |drop_off| %>
       <%= form.label drop_off %>
-      <%= form.radio_button :drop_off, drop_off %>
+      <%= form.radio_button :drop_off, drop_off %><p>
 
       <% if drop_off == listing.drop_off %>
       <% form.radio_button :drop_off, :checked => true %>
-      <% end %>
+      <% end %></p>
       <% end %>
   </div><br>
 
   <div class="text">
-    <%= form.label :notes %><br/>
+    <strong><%= form.label :notes %><br/></strong>
     <%= form.text_area :notes, placeholder: "Favourite treats, good with kids & pets, etc" %>
   </div><br>
 
 
   <div class="text">
-    <%= form.label :image %><br/>
+    <strong><%= form.label :image %><br/></strong>
     <%= form.file_field :image, accept: 'image/png, image/gif, image/jpg, image/jpeg' %>
   </div>
 
 
   <br>
-  <div class="btn-1">
-    <%= form.submit %>
+  <div>
+    <%= form.submit class: "btn btn-info btn-sm"%>
+  </div>
   </div>
 
 <% end %>
