@@ -40,7 +40,7 @@ class DepositsController < ApplicationController
               listing_id: @listing.id
           }
       },
-      success_url: "#{root_url}payments/success?userId=#{current_user.id}&listingId=#{@listing.id}",
+      success_url: "#{root_url}deposits/success?userId=#{current_user.id}&listingId=#{@listing.id}",
       cancel_url: "#{root_url}listings"
   )
     @session_id = session.id
