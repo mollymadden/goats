@@ -1,8 +1,20 @@
-Thanks <%= current_user.email %>,<br>
-You've successfully paid <%= number_to_currency(@listing.price) %> to <%= @listing.user.email %> <br> 
 
-Please arrange your hire of <%= @listing.title %> by emailing <%= @listing.user.email %> <br>
+
+
+Thanks <%= current_user.email %>,<br>
+You've successfully paid <%= number_to_currency(@deposit.amount) %> to <%= @deposit.listing.user.email %> <br> 
+
+Please arrange your hire of <%= @deposit.listing.title %> by emailing <%= @deposit.listing.user.email %> <br>
+
+Your goat will be delivered to <%= @deposit.address %>.<br>
+
+Your confirmation number is <%= @deposit.stripe_charge_id %>
+
+
 
 
 <p><%= link_to "Go to listings", listings_path %></p>
 <p><%= link_to "See your order history", deposits_path %></p>
+
+<%= link_to "Print This Page", '#', class: "btn btn-primary", 
+            onclick: 'window.print();return false;' %>

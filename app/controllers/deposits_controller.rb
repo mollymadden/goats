@@ -7,9 +7,10 @@ class DepositsController < ApplicationController
     # Eager load listing, owner and reviews to allow for title and name and review links in view
     @deposits = Deposit.where(user_id: current_user.id).includes(listing: :user)
     # Get current user's listings ids to allow deposit retrieval
-    listing_ids = Listing.where(user_id: current_user.id).pluck(:id)
-    # Eager load listing and user to allow for title and name in view
-    @lister_deposits = Deposit.where(listing_id: listing_ids).includes(:listing, :user)
+    # listing_ids = Listing.where(user_id: current_user.id).pluck(:id)
+    # # Eager load listing and user to allow for title and name in view
+    # @lister_deposits = Deposit.where(listing_id: listing_ids).includes(:listing, :user)
+    # @deposit_owner = @deposit.listing.user.id
   end
 
   # GET /deposits/1
@@ -21,8 +22,7 @@ class DepositsController < ApplicationController
   def new
     @deposit = Deposit.new
     @listing = Listing.find(params[:listing_id])
-    @deposit.listing = @listing
-    @amount = @listing.price
+
 
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -40,25 +40,27 @@ class DepositsController < ApplicationController
               listing_id: @listing.id
           }
       },
-      success_url: "#{root_url}deposits/success?userId=#{current_user.id}&listingId=#{@listing.id}",
+      success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}&address=#{@deposit.address}",
       cancel_url: "#{root_url}listings"
   )
     @session_id = session.id
+
   end
 
   # GET /deposits/1/edit
   def edit
   end
 
+  def success
+    @deposit = Deposit.new(deposit_params)
+    @deposit.save
 
+  end
 
 
   def create
 
-    @deposit = Deposit.new(deposit_params)
-    @deposit.user_id = current_user.id
-    @deposit.listing_id = @listing.id
-    @deposit.deposit_date = Date.today
+
 
       if current_user.stripe_cust_id.nil?
         customer = Stripe::Customer.create(
@@ -73,13 +75,7 @@ class DepositsController < ApplicationController
       customer.source = params[:stripeToken]
       customer.save
 
-      # Create stripe charge for given date range
-      charge = Stripe::Charge.create(
-        :customer    => current_user.stripe_cust_id,
-        :amount      => @amount,
-        :description => "deposit for listing id: #{@listing.id}",
-        :currency    => 'aud'
-      )
+
 
       @deposit.stripe_charge_id = charge.id
       # Create deposit
@@ -131,6 +127,6 @@ class DepositsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deposit_params
-        params.require(:deposit).permit(:user_id, :address, :listing_id, :listing_title, :listing_price, :stripe_charge_id)
+        params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
     end  
   end

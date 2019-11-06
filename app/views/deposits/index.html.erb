@@ -2,9 +2,6 @@
 
 <h4></h4>
 
-
-
-
 <div class="container">
 
   <table class="table table-striped table-responsive d-xl-table">
@@ -24,7 +21,7 @@
 
 
   <tbody>
-    <% @lister_deposits.each do |deposit| %>
+    <% @deposits.each do |deposit| %>
       <tr>
         <td><%= deposit.stripe_charge_id %></td>
         <td><%= deposit.listing.title %></td>
