@@ -14,10 +14,7 @@ class DepositsController < ApplicationController
     # @deposit_owner = @deposit.listing.user.id
   end
 
-  # GET /deposits/1
-  # GET /deposits/1.json
-  def show
-  end
+
 
   # GET /deposits/new
   def new
@@ -28,6 +25,7 @@ class DepositsController < ApplicationController
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       customer_email: current_user.email,
+      customer_address: @deposit.address,
       line_items: [{
           name: @listing.title,
           description: @listing.description,
@@ -38,7 +36,8 @@ class DepositsController < ApplicationController
       payment_intent_data: {
           metadata: {
               user_id: current_user.id,
-              listing_id: @listing.id
+              listing_id: @listing.id,
+              customer_address: @deposit.address,
           }
       },
       success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}&address=#{@deposit.address}",
@@ -46,11 +45,10 @@ class DepositsController < ApplicationController
   )
     @session_id = session.id
 
+
   end
 
-  # GET /deposits/1/edit
-  def edit
-  end
+
 
   def success
     @deposit = Deposit.new(deposit_params)
@@ -60,38 +58,7 @@ class DepositsController < ApplicationController
 
 
   def create
-
-
-
-      if current_user.stripe_cust_id.nil?
-        customer = Stripe::Customer.create(
-          :email => params[:stripeEmail],
-        )
-        # Save stripe customer id
-        current_user.stripe_cust_id = customer.id
-        current_user.save
-      end
-      # Update source
-      customer = Stripe::Customer.retrieve(current_user.stripe_cust_id)
-      customer.source = params[:stripeToken]
-      customer.save
-
-
-
-      @deposit.stripe_charge_id = charge.id
-      # Create deposit
- 
-
-
-      # Check if successfully saves to database
-      if @deposit.save
-        redirect_to deposits_path, notice: 'deposit was successfully created.'
-      else
-        redirect_to new_deposit_path(@listing), alert: 'deposit failed.'
-      end
-
-    rescue Stripe::CardError => e
-      redirect_to new_deposit_path(@listing), alert: e.message
+    @deposit = Deposit.find(params[:id])
   end
 
   # PATCH/PUT /deposits/1

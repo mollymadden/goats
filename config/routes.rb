@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   get '/about' , to: 'pages#about'
   get '/filter' , to: 'pages#filter'
 
-  get "/deposits/success", to: "deposits#success"
-
+  post "/deposits/", to: "deposits#success"
+  post "/deposits/", to: "deposits#index"
 
 end
 
