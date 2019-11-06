@@ -1,5 +1,5 @@
 Thanks <%= current_user.email %>,<br>
-You've successfully paid <%= number_to_currency(@listing.price/100.0) %> to <%= @listing.user.email %> <br> 
+You've successfully paid <%= number_to_currency(@listing.price) %> to <%= @listing.user.email %> <br> 
 
 Please arrange your hire of <%= @listing.title %> by emailing <%= @listing.user.email %> <br>
 
