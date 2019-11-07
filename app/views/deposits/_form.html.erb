@@ -1,13 +1,23 @@
 <%= form_with(model: deposit, local: true) do |form| %>
+  <% if deposit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(deposit.errors.count, "error") %> prohibited this deposit from being saved:</h2>
+      <ul>
+      <% deposit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <p>
-  <strong>Listing Title:</strong>
-  <%= @listing.title %>
+    <strong>Listing Title:</strong>
+    <%= @listing.title %>
   </p>
 
-    <p>
-  <strong>Breed:</strong>
-  <%= @listing.breed %> Goat
+  <p>
+    <strong>Breed:</strong>
+    <%= @listing.breed %> Goat
   </p>
 
   <p>
@@ -16,23 +26,24 @@
   </p>
 
   <div class="field">
-    <%=hidden_field_tag :user, current_user %>
+    <%=hidden_field_tag :user_id, current_user.id %>
   </div>
 
   <div class="field">
-    <strong><%= form.label :address %>:</strong>
-    <%= form.text_field :address %>
+    <strong><%= label_tag :address %>:</strong>
+    <%= text_field_tag :address %>
   </div>
 
-  <p><strong>Confirmation Email Address:</strong> <%= current_user.email %></p>
+  <p><strong>Confirmation Email Address:</strong> <%=current_user.email %></p>
 
   <div class="field">
     <%=hidden_field_tag :listing_id, params[:listing_id] %>
   </div>
 
-  <div>
-    <%= form.submit class: "btn btn-info btn-sm"%>
-  </div>
+    <button type="submit" class="btn btn-info btn-sm" data-stripe="payment">
+        Pay Deposit of $<%= @listing.price %>
+    </button>
+<% end %>
 
     <script src="https://js.stripe.com/v3/"></script>
 
@@ -43,14 +54,8 @@
         const stripe = Stripe(
             "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
         );
-
         stripe.redirectToCheckout({
             sessionId: "<%= @session_id %>"
         });
         });
     </script>
-
-
-  <% end %>
-
-

@@ -1,7 +1,10 @@
-<%= form_tag listings_path, :method => 'get' do %>
+<p class="text-warning">★ your goat</p><br>
+
+  <%= form_tag listings_path, :method => 'get' do %>
    <%= select_tag(:skill_id, options_for_select(Skill.order(:title).pluck(:title, :id) ,:selected =>params[:option]), onchange: 'this.form.submit();', class: "form-control custom-select", prompt: "Filter By Special Skill", include_blank: "Show All")%>
- <% end %>
+  <% end %>
  
+
 
 <div class="group">
 
@@ -19,6 +22,12 @@
         <%= listing.breed %> Goat<br>
          $<%= listing.price %> per day<br>
    <small>Special Skill: <%= listing.skill.title %></small>
+      <% if current_user.id == listing.user_id %>
+      <p class="text-warning">★</p>
+      <% end %>          
+
+
+
   </div>
 </div>
 

@@ -11,7 +11,7 @@
 
   <body>
 
-  <div class="logo"><strong> GOATS.</strong><img src="/assets/ikon2.png" height=45px, width=45px></div>
+  <div class="logo"><strong><%= link_to "GOATS.", root_path %></strong><img src="/assets/ikon2.png" height=45px, width=45px></div>
     <nav class="text-nav">
   <div>
     
@@ -42,5 +42,12 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <%= yield %>
+
+<!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</div>
+
+
   </body>
 </html>

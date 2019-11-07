@@ -11,11 +11,11 @@
         <th colspan="7" class="border-top-0"></th>
       </tr>
       <tr>
-        <th style="min-width: 200px;">Order Number</th>
+        <th style="min-width: 150px;">Order Number</th>
         <th style="min-width: 110px;">Listing Title</th>
+        <th style="min-width: 110px;">Goat ID</th>
         <th style="min-width: 130px;">Amount Paid</th>
         <th style="min-width: 130px;">Date / Time Paid</th>
-        <th style="min-width: 130px;">Delivery Address</th>
         <th style="min-width: 110px;">Owner Email</th>
       </tr>
     </thead>
@@ -24,11 +24,12 @@
   <tbody>
     <% @deposits.each do |deposit| %>
       <tr>
-        <td><%= deposit.stripe_charge_id %></td>
-        <td><%= deposit.listing.title %></td>
+        <td><%= deposit.created_at.to_i %></td>
+        <td><%= link_to listing_path(deposit.listing ) do %>
+        <%= deposit.listing.title %><% end %></td>
+        <td><%= deposit.listing.id %></td>
         <td>$<%= deposit.amount %></td>
         <td><%= deposit.created_at %></td>
-        <td><%= deposit.address %></td>
         <td><%= deposit.listing.user.email %></td>
       </tr>
     <% end %>

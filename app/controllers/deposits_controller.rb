@@ -21,7 +21,6 @@ class DepositsController < ApplicationController
     @deposit = Deposit.new
     @listing = Listing.find(params[:listing_id])
 
-
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       customer_email: current_user.email,
@@ -40,7 +39,7 @@ class DepositsController < ApplicationController
               customer_address: @deposit.address,
           }
       },
-      success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}&address=#{@deposit.address}",
+      success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}",
       cancel_url: "#{root_url}listings"
   )
     @session_id = session.id
@@ -51,15 +50,22 @@ class DepositsController < ApplicationController
 
 
   def success
-    @deposit = Deposit.new(deposit_params)
-    @deposit.save
+    if params[:address]
+      @deposit = Deposit.new(deposit_params)
+      return @deposit.save
+    end
+    @deposit = Deposit.last
+  end
 
+  def webhook
+    puts "we're here"
+    status 200
   end
 
 
-  def create
-    @deposit = Deposit.find(params[:id])
-  end
+  # def create
+  #   @deposit = Deposit.find(params[:id])
+  # end
 
   # PATCH/PUT /deposits/1
   # PATCH/PUT /deposits/1.json
@@ -95,6 +101,6 @@ class DepositsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deposit_params
-        params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
+      params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
     end  
   end
