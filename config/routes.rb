@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get "/deposits/", to: "deposits#index"
 
-  get "*path", to: "pages#not_found", constraints: lambda { |req|
+  get "*path", to: "pages#not_found", as: "page_not_found", constraints: lambda { |req|
   req.path.exclude? 'rails/active_storage'
 }
   

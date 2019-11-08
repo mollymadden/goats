@@ -12,6 +12,9 @@ class ListingsController < ApplicationController
 
 
   def show
+    if @listing == nil
+      redirect_to page_not_found_path("page_not_found")
+    end
   end
 
   
@@ -63,7 +66,7 @@ class ListingsController < ApplicationController
   private
   
     def set_listing
-      @listing = Listing.find(params[:id])
+      @listing = Listing.find_by_id(params[:id])
     end
 
     def set_select_options
