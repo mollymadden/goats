@@ -11,15 +11,17 @@ Rails.application.routes.draw do
   root 'pages#home'
   get '/contact' , to: 'pages#contact'
   get '/about' , to: 'pages#about'
-  get '/filter' , to: 'pages#filter'
 
   get "/deposits/confirmation", to: "deposits#confirmation"
   post "/deposits/", to: "deposits#create"
-
 
   get "/deposits/success", to: "deposits#success"
 
   get "/deposits/", to: "deposits#index"
 
+  get "*path", to: "pages#not_found", constraints: lambda { |req|
+  req.path.exclude? 'rails/active_storage'
+}
+  
 end
 

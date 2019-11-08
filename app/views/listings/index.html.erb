@@ -5,7 +5,7 @@
 <% end %>
 
   <%= form_tag listings_path, :method => 'get' do %>
-   <%= select_tag(:skill_id, options_for_select(Skill.order(:title).pluck(:title, :id) ,:selected =>params[:option]), onchange: 'this.form.submit();', class: "form-control custom-select", prompt: "Filter By Special Skill", include_blank: "Show All")%>
+   <%= select_tag(:skill_id, options_for_select(Skill.order(:title).pluck(:title, :id) ,:selected =>params[:option]), onchange: 'this.form.submit();', class: "form-control custom-select", prompt: "All goats are Garden Gurus, but some of our goats have extra special skills! Click here to filter by area of expertise.", include_blank: "Show All")%>
   <% end %>
  
 
