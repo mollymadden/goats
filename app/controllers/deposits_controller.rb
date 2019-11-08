@@ -2,21 +2,11 @@ class DepositsController < ApplicationController
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!  
 
-  # GET /deposits
-  # GET /deposits.json
+
   def index
-    # Eager load listing, owner and reviews to allow for title and name and review links in view
     @deposits = Deposit.where(user_id: current_user.id).includes(listing: :user)
-    # Get current user's listings ids to allow deposit retrieval
-    # listing_ids = Listing.where(user_id: current_user.id).pluck(:id)
-    # # Eager load listing and user to allow for title and name in view
-    # @lister_deposits = Deposit.where(listing_id: listing_ids).includes(:listing, :user)
-    # @deposit_owner = @deposit.listing.user.id
   end
 
-
-
-  # GET /deposits/new
   def new
     @deposit = Deposit.new
     @listing = Listing.find(params[:listing_id])
@@ -41,20 +31,53 @@ class DepositsController < ApplicationController
       },
       success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}",
       cancel_url: "#{root_url}listings"
-  )
+    )
     @session_id = session.id
-
-
   end
 
 
 
-  def success
-    if params[:address]
-      @deposit = Deposit.new(deposit_params)
-      return @deposit.save
+
+  def create
+    @deposit = Deposit.new(deposit_params)
+    if @deposit.save
+      redirect_to deposits_confirmation_path(deposit: @deposit)
     end
-    @deposit = Deposit.last
+  end
+
+  def confirmation
+    @deposit = Deposit.find(params[:deposit])
+    @listing = @deposit.listing
+
+
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+          name: @listing.title,
+          description: @listing.description,
+          amount: @listing.price*100,
+          currency: 'aud',
+          quantity: 1
+      }],
+      payment_intent_data: {
+          metadata: {
+              user_id: current_user.id,
+              listing_id: @listing.id
+          }
+      },
+      success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}&deposit_id=#{@deposit.id}",
+      cancel_url: "#{root_url}listings"
+    )
+    @session_id = session.id
+  end
+
+  def success
+    # if params[:address]
+    #   @deposit = Deposit.new(deposit_params)
+    #   return @deposit.save
+    # end
+    @deposit = Deposit.find(params[:deposit_id])
   end
 
   def webhook
@@ -63,12 +86,6 @@ class DepositsController < ApplicationController
   end
 
 
-  # def create
-  #   @deposit = Deposit.find(params[:id])
-  # end
-
-  # PATCH/PUT /deposits/1
-  # PATCH/PUT /deposits/1.json
   def update
     respond_to do |format|
       if @deposit.update(deposit_params)
@@ -82,8 +99,7 @@ class DepositsController < ApplicationController
   end
 
 
-  # DELETE /deposits/1
-  # DELETE /deposits/1.json
+
   def destroy
     @deposit.destroy
     respond_to do |format|
@@ -94,12 +110,11 @@ class DepositsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_deposit
       @deposit = Deposit.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def deposit_params
       params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
     end  

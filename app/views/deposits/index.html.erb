@@ -28,7 +28,7 @@
         <td><%= link_to listing_path(deposit.listing ) do %>
         <%= deposit.listing.title %><% end %></td>
         <td><%= deposit.listing.id %></td>
-        <td>$<%= deposit.amount %></td>
+        <td>$<%= deposit.listing.price %></td>
         <td><%= deposit.created_at %></td>
         <td><%= deposit.listing.user.email %></td>
       </tr>

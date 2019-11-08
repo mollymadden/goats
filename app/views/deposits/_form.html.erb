@@ -40,22 +40,17 @@
     <%=hidden_field_tag :listing_id, params[:listing_id] %>
   </div>
 
-    <button type="submit" class="btn btn-info btn-sm" data-stripe="payment">
-        Pay Deposit of $<%= @listing.price %>
-    </button>
+
+
+  <button type="submit" value="Submit" action="deposits/confirmation" method="post" class="btn btn-info btn-sm">Review details</button>
+
+
+
+
+
+  <small><%= link_to "Back to #{@listing.title} ", listing_path(@listing) %></small>
+
 <% end %>
 
-    <script src="https://js.stripe.com/v3/"></script>
 
-    <script>
-    document
-        .querySelector("[data-stripe='payment']")
-        .addEventListener("click", () => {
-        const stripe = Stripe(
-            "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
-        );
-        stripe.redirectToCheckout({
-            sessionId: "<%= @session_id %>"
-        });
-        });
-    </script>
+
