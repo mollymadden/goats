@@ -1,18 +1,13 @@
 class ListingsController < ApplicationController
-  before_action :authenticate_user!  
-  skip_before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, except: [:index]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :set_user_listing, only: [:edit, :update, :destroy]
   before_action :set_select_options, only: [:new, :edit, :update]
 
 
-
-
-
   def index
     @listings = Listing.all.order('updated_at DESC')
     @listings = @listings.where(skill_id: params[:skill_id]) if params[:skill_id].present?
-
   end
 
 
