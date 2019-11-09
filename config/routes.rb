@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/contact' , to: 'pages#contact'
   get '/about' , to: 'pages#about'
 
+  get '/help' , to: 'listings#help'
+
   get "/deposits/confirmation", to: "deposits#confirmation"
   post "/deposits/", to: "deposits#create"
 

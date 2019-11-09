@@ -108,14 +108,14 @@ class DepositsController < ApplicationController
     end
   end
 
-  private
+private
 
-    def set_deposit
-      @deposit = Deposit.find(params[:id])
-    end
-
-
-    def deposit_params
-      params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
-    end  
+  def set_deposit
+    @deposit = Deposit.find(params[:id])
   end
+
+
+  def deposit_params
+    params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
+  end  
+end

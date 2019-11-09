@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="icon" href="/assets/favicon.png">
     <title>GOATS</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,15 +12,21 @@
 
   <body>
 
-  <div class="logo"><strong><%= link_to "GOATS.", root_path %></strong><img src="/assets/ikon2.png" height=45px, width=45px></div>
+  <div class="logo"><img src="/assets/jimandgoat.png" height=150></div>
+
+  
     <nav class="text-nav">
   <div>
+
+
+
+
     
-    <%= link_to "Home | ", root_path %>
-    <%= link_to "List A Goat | ", new_listing_path %>
-    <%= link_to "See All Goats | ", listings_path %>
-    <%= link_to "Rental History | ", deposits_path %>
-    <%= link_to "About | ", about_path %>
+    <%= link_to "Home", root_path %>
+    <%= link_to "List A Goat", new_listing_path %>
+    <%= link_to "See All Goats", listings_path %>
+    <%= link_to "Rental History", deposits_path %>
+    <%= link_to "About", about_path %>
     <% if user_signed_in? %>
        <%= link_to('Sign Out', destroy_user_session_path, method: :delete) %>
       <% else %>

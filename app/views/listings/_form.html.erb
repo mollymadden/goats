@@ -32,13 +32,15 @@
 
 
 
-      <strong><%= form.label :gender %></strong><br>
+      <strong><%= form.label :gender %></strong>
+      <a target="" href="/help" title="Only Billy Goats (male) can be Lover Goats and only Nanny Goats (female) can be Dairy Queens. By listing a goat on Jim's Goats you agree to the Terms and Conditions found here."><img src="https://shots.jotform.com/kade/Screenshots/blue_question_mark.png" height="13px"/></a><br>
       <% Listing.genders.keys.each do |gender| %>
       <%= form.label gender %>
       <%= form.radio_button :gender, gender %><p>
 
       <% if gender == listing.gender %>
-      <% form.radio_button :gender, :checked => true %></p>
+      <% form.radio_button :gender, :checked => true %>    
+</p>
       <% end %>
       <% end %>
   </div><br>
@@ -52,7 +54,7 @@
   <strong>Special
     <%= form.label :skill_id %><br/></strong>
     <%= form.select :skill_id, options_for_select( Skill.all.collect { |u| [u.title, u.id] }, :selected => listing.skill_id )%>
-    <a target="_blank" href="" title="Only Billy Goats (male) can be Lover Goats and only Nanny Goats (female) can be Dairy Queens"><img src="https://shots.jotform.com/kade/Screenshots/blue_question_mark.png" height="13px"/></a>
+    <a target="" href="/help" title="Only Billy Goats (male) can be Lover Goats and only Nanny Goats (female) can be Dairy Queens. By listing a goat on Jim's Goats you agree to the Terms and Conditions found here."><img src="https://shots.jotform.com/kade/Screenshots/blue_question_mark.png" height="13px"/></a>
   </div><br>
 
 
