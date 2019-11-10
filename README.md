@@ -46,7 +46,7 @@ For those who live in an inner suburb, there is often a clash of concerns - can 
 
 * Tech stack (e.g. html, css, deployment platform, etc)
 
-	* Jim's Goats was built with Ruby on Rails, using embedded Ruby, HTML, CSS, Bootstrap, and has been deployed on Heroku.
+	* Jim's Goats was built with Ruby on Rails, using embedded Ruby, HTML, CSS, Bootstrap, and has been deployed on Heroku. A Puma web server is utilised through Rails 6.0.
 
 **R12 - User stories for your app**
 
@@ -105,6 +105,8 @@ WISHLIST
 
 * High-level abstractions for the benefit of the user allows them create, read, update, and delete data on various tables. Like in all good apps, the user does not see the functionality behind the scenes, because the code has been abstracted between SQL, Ruby, and other languages to a final graphical user interface. Using the same example as above, the index filter is abstracted to HTML by way of embedded ruby which is easily readable and understood by any user. 
 
+* I further used Active Record and Active Storage to abstract databases and files respectively. Form helpers also assisted in abstraction from Action View to HTML.
+
 **R16 - Detail any third party services that your app will use**
 
   The app uses the following third party services:
@@ -118,9 +120,27 @@ WISHLIST
 
 **R17 - Describe your projects models in terms of the relationships (active record associations) they have with each other**
 
+* I decided to base my models around a central model - being the listings table. The listings table links to the users table, skills table, and deposits table through foreign keys. The user table acts as an intermediary between listings and deposits as seen above in the attached ERD (R14.) Several migrations were run to acheive the final result.
+
 **R18 - Discuss the database relations to be implemented in your application**
 
+* The database relations implemented are as follows:
+
+* One to many
+	* One user has many listings
+	* One skill has many listings
+* Many to many
+	*  Many listings can have many deposits through users
+
+I chose to model my first rails project this way to simplify possible pitfalls with a complex structure while still allowing for at least one many to many relationship to give a bit of depth to the model. A user should be able to have many listings and therefore many deposits through these listings.
+
 **R19 - Provide your database schema design**
+
+* The database relations implemented are as follows: A user has many listings and many deposits through listings. A listing belongs to a user and has one deposit through a user. A listing also belongs to skill, which has many listings. A deposit belongs to user and also belongs to listing. I chose to make genders and drop_off on the listings table because as binary options that allowed me to use an enum in the model. I chose to use text for notes and description to allow for larger chunks of text in these fields. Bigints were used for all ID's to allow for easy scaling. Please see below screenshot of schema for further information. 
+
+![Schema1](https://raw.githubusercontent.com/mollymadden/goats/master/app/assets/images/schema-1.png)
+![Schema2](https://raw.githubusercontent.com/mollymadden/goats/master/app/assets/images/schema-2.png)
+
 
 **R20 - Describe the way tasks are allocated and tracked in your project**
 ![Trello Board](https://github.com/mollymadden/goats/blob/master/app/assets/images/trello.png?raw=true)
