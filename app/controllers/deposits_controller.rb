@@ -20,6 +20,7 @@ class DepositsController < ApplicationController
           description: @listing.description,
           amount: @listing.price*100,
           currency: 'aud',
+          date: @deposit.date,
           quantity: 1
       }],
       payment_intent_data: {
@@ -27,6 +28,7 @@ class DepositsController < ApplicationController
               user_id: current_user.id,
               listing_id: @listing.id,
               customer_address: @deposit.address,
+              date: @deposit.date,
           }
       },
       success_url: "#{root_url}deposits/success?user_id=#{current_user.id}&listing_id=#{@listing.id}&amount=#{@listing.price}",
@@ -73,15 +75,12 @@ class DepositsController < ApplicationController
   end
 
   def success
-    # if params[:address]
-    #   @deposit = Deposit.new(deposit_params)
-    #   return @deposit.save
-    # end
+
     @deposit = Deposit.find(params[:deposit_id])
   end
 
   def webhook
-    puts "we're here"
+
     status 200
   end
 
@@ -116,6 +115,6 @@ private
 
 
   def deposit_params
-    params.permit(:user_id, :address, :listing_id, :amount, :stripe_charge_id)
+    params.permit(:user_id, :address, :listing_id, :date)
   end  
 end

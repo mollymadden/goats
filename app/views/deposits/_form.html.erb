@@ -1,3 +1,10 @@
+
+<p><strong>NOTE</strong></p>
+<p>In order to book this goat, we require a deposit of one day's rental fee. Should you require a goat for more than one day, please make overnight arrangements privately with the owner of the goat.</p>
+
+<p>Please note, goats are subject to availability. Goats are not guaranteed for all dates.</p>
+<br>
+
 <%= form_with(model: deposit, local: true) do |form| %>
   <% if deposit.errors.any? %>
     <div id="error_explanation">
@@ -25,26 +32,34 @@
     $<%= @listing.price %>
   </p>
 
+<p>
+  <div class="field">
+    <strong>Requested <%= form.label :date %>:</strong>
+    <%= form.date_field :date, value: params[:deposit_date] %>
+  </div>
+<p>
+
   <div class="field">
     <%=hidden_field_tag :user_id, current_user.id %>
   </div>
 
+  <p><strong>Confirmation Email Address:</strong> <%=current_user.email %></p>
+
+
+
   <div class="field">
-    <strong><%= label_tag :address %>:</strong>
-    <input id="autocomplete_search" name="address" form-tag=:address type="text" class="form-control" placeholder="Search" />
+    <strong><%= label_tag :address %> For Service:</strong>
+    <input id="autocomplete_search" name="address" form-tag=:address type="text" class="form-control" placeholder="House number, street, city, state, postcode. PLEASE NOTE we only service greater Melbourne." />
       <input type="hidden" name="lat">
       <input type="hidden" name="long">
   </div>
 
 
-
-
-  <p><strong>Confirmation Email Address:</strong> <%=current_user.email %></p>
-
   <div class="field">
     <%=hidden_field_tag :listing_id, params[:listing_id] %>
   </div>
 
+<br>
 
 
   <button type="submit" value="Submit" action="deposits/confirmation" method="post" class="btn btn-info btn-sm">Review details</button>

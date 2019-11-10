@@ -1,14 +1,17 @@
 <p>Please confirm the following details are correct before proceeding to payment.</p>
 
-<p>Email: <%= current_user.email %> </p>
-<p>Address: <%= @deposit.address %>
-<p>Goat: <%= @deposit.listing.title %> ($<%= @deposit.listing.price %> per day ) </p>
+<p><strong>Your Email:</strong> <%= current_user.email %> </p>
+<p><strong>Your Address:</strong> <%= @deposit.address %>
+<p><strong>Chosen Goat:</strong> <%= @deposit.listing.title %> ($<%= @deposit.listing.price %> per day ) </p>
+
 
     
     
     <button type="submit" class="btn btn-info btn-sm" data-stripe="payment">
         Pay Deposit of $<%= @listing.price %>
     </button>
+
+    <small><%= link_to 'Go Back', :back %></small>
 
 
     <script src="https://js.stripe.com/v3/"></script>

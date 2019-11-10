@@ -8,11 +8,8 @@ ruby '2.5.3'
 gem 'devise'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
-gem 'has_scope'
-gem 'filterrific'
-
-
-
+gem "aws-sdk-s3", "~> 1.52"
+gem "stripe", "~> 5.7"
 
 
 
@@ -74,6 +71,3 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "aws-sdk-s3", "~> 1.52"
-
-gem "stripe", "~> 5.7"
