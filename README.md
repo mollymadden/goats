@@ -1,38 +1,54 @@
 
 ## Jim's Goats - ReadMe
 
-1. **CMP1042-1.2** Explain the different high-level components (abstractions) in your App.
- 	* In terms of development, many SQL queries have been abstracted into Ruby code, such as in views/listings/index where data can be filtered. This filter function uses the ruby method 'pluck,' which in this instance is an abstraction of SQL's 'where.' This particular abstraction is for the developer's (my) convenience.
- 	
-	* High-level abstractions for the benefit of the user allows them create, read, update, and delete data on various tables. Like in all good apps, the user does not see the functionality behind the scenes, because the code has been abstracted between SQL, Ruby, and other languages to a final graphical user interface. Using the same example as above, the index filter is abstracted to HTML by way of embedded ruby which is easily readable and understood by any user. 
+
+**R7 - Identification of the problem you are trying to solve by building this particular marketplace app**
+
+In Melbourne there is an ever growing demand for sustainable, ethical, and environmentally friendly solutions to every day problems. From only Melbourne could Jim's Goats be born! Jim's Goats brings the sensibilities of beautiful country Victoria to the city by way of Goat. Goats can provide garden maintenance, exercise, companionship, dairy products, and breeding services all in one adorable animal, which is why we have launched Jim's Goats- the first ever two sided marketplace for goat rental.   
+
+**R8 - Why is it a problem that needs solving?**
+
+For those who live in an inner suburb, there is often a clash of concerns - can you still enjoy a patch of land and the benefits that come from having land without the expensive equipment and equipment storage? Further, can you routinely maintain that land without devoting your weekend to it or causing extreme noise and air pollution? Of course you can! With a goat! Goats will happily (& silently!) chew away dangerous and unsightly weeds and brush while you go about your business. In the age of the 'gig economy' let’s make lawn mower ownership a thing of the past, and utilise nature's lawn mowers- GOATS! Farmers will benefit by increasing their income while also outsourcing their goat’s dinner. City folk will benefit by knowing they are taking care of their home maintenance in an ethical environmentally and cost-effective way. Goats will benefit by being able to tour the city whilst enjoying a degustation of varying plants. The greater community will benefit by enjoying a longer sleep in on Sunday instead of listening to your leaf blower. Finally, and perhaps most importantly, the environment will benefit by the reduction of harmful pollutants caused by petrol powered lawn mowers and weed whackers.
+
+**R9 - A link (URL) to your deployed app (i.e. website)**
+
+[Jim's Goats - Heroku](jimsgoats.herokuapp.com)
+
+**R10 - A link to your GitHub repository (repo).**
+
+[Github Repo](https://github.com/mollymadden/goats)
+
+**R11 - Description of your marketplace app (website), including:**
+* Purpose
+
+	* The purpose of this app is to bring together farmers (or goat owners) and those who require garden maintenance.
+
+* Functionality / features
+	* The most interesting features of this app includes payment functionality via Stripe, and image uploading functionality using Amazon Web Services.
+
+* Sitemap
+![Sitemap](https://github.com/mollymadden/goats/blob/master/app/assets/images/jimsgoatssitemap.png?raw=true)
+
+* Screenshots
+
+![Homepage](https://github.com/mollymadden/goats/blob/master/app/assets/images/ss_home.png?raw=true)
+
+![New Listing](https://github.com/mollymadden/goats/blob/master/app/assets/images/ss_new_listing.png?raw=true)
+
+![Index](https://github.com/mollymadden/goats/blob/master/app/assets/images/ss_index.png?raw=true)
+
+![Order History](https://github.com/mollymadden/goats/blob/master/app/assets/images/ss_order_history.png?raw=true)
 
 
+* Target audience
 
-2. **CMP1042-1.3** Detail any third party services that your App will use
-	* The app uses the following third party services:
-		* Devise - a ruby gem providing authentication solution for Rails. This gem creates a full MVC for user profile based functionality.
-		* Stripe - an API allowing real world payment functionality. Implemented as a gem with javascript.
-		* Bootstrap - a CSS framework for basic styling. Implemented as a gem with SCSS.
-		* Amazon Web Services - an API providing a data storage solution located in Amazon's cloud network.
-		* Heroku - The platform on which the app is deployed. Heroku manages the database and server functionality with minimal fuss, and is free for small scale rails projects.
-		* Postgres - an open source database that marries up nicely to Heroku.
-		* Google Places API - Used in this app to provide autocomplete suggestions based on the typing of an address. 		 
+	* The target audience for Jim's Goats are a market segment not reached by Jim's Mowing primarily due to cost. This marget segment is not concerned with pristine landscaping, and so cannot justify a weekly bill of $100+ in spring and summer for garden maintenance. They live in inner suburbs of Melbourne, are likely renters, and do not possess the storage space to own their own equipment. They are likely in their mid twenties and are frequent users of other two-sided marketplaces such as Airbnb or Uber. This customer is environmentally conscious, tries to buy locally, and has completed some/all of their higher education. They are not married and do not have kids. They do not have a large disposable income. They will use this app mainly on their phone, and so RESPONSIVE DESIGN will need to be first on the to do list post MVP.
 
-3. **CMP1042-3.1** Identify the problem you’re trying to solve by building this particular marketplace App? Why is it a problem that needs solving?
-	* In Melbourne there is an ever growing demand for sustainable, ethical, and environmentally friendly solutions to every day problems. From only Melbourne could Jim's Goats be born! Jim's Goats brings the sensibilities of beautiful country Victoria to the city by way of Goat.   
+* Tech stack (e.g. html, css, deployment platform, etc)
 
-4. **CMP1042-3.3**
-Describe your project’s models in terms of the relationships (active record associations) they have with each other
+	* Jim's Goats was built with Ruby on Rails, using embedded Ruby, HTML, CSS, Bootstrap, and has been deployed on Heroku.
 
-5. **CMP1042-4.2**
-Discuss the database relations to be implemented with reference to the ERD
-
-6. **CMP1042-4.3**
-Provide your database schema design
-![ERD](https://github.com/mollymadden/goats/blob/master/app/assets/images/GOATS_erd.jpeg?raw=true)
-
-7. **CMP1042-6.1**
-Provide User stories for your App
+**R12 - User stories for your app**
 
 **Customer User Story**
 
@@ -58,16 +74,16 @@ WISHLIST
 
 **Vendor User Story**
 
-* Marge the 42 year old married farmer owns an animal sanctuary and pumpkin farm in Gippsland with 40 goats on her property. She has been deeply affected by the droughts and fires across Victoria and is struggling to provide enough greenery for her goats to consume. She has read an article on News.com.au about how goats are being hired by Metro to clean up hazardous brush around Belgrave station in Melbourne, and decides to google 'Goat Hire.'
+* Marge the 42 year old married farmer owns an animal sanctuary and pumpkin farm in Gippsland with 20 goats on her property. She has been deeply affected by the droughts and fires across Victoria and is struggling to provide enough greenery for her goats to consume. She has read an article on News.com.au about how goats are being hired by Metro to clean up hazardous brush around Belgrave station in Melbourne, and decides to google 'Goat Hire.'
 * The first link she clicks on is jimsgoats.herokuapp.com
-* She heads to the About page to read what this is all about, and learns that Jim's Goats is a two-sided marketplace bringing together Goat Owners and customers. She is concerned that someone might hurt one of her goats through the platform, but is comforted by the strict terms and conditions imposed by the website. She learns that Jim’s Goats has a strong security policy and collects data about all goat renters to ensure that they are prosecuted if necessary. She heads back to the home page via the nav bar.
+* She heads to the About page to read what this is all about, and learns that Jim's Goats is a two-sided marketplace bringing together Goat owners and customers. She is concerned that someone might hurt one of her goats through the platform, but is comforted by the strict terms and conditions imposed by the website. She learns that Jim’s Goats has a strong security policy and collects data about all goat renters to ensure that they are prosecuted if necessary. She heads back to the home page via the nav bar.
 * She sees two options, "I need a goat," or "I have a goat"
 * She chooses "I have a goat."
 * From there, she is redirected to a sign-up or login screen
 * She chooses sign-up
 * Marge is prompted to enter her email and password.
 * Once she finishes signing up, Marge is redirected to create a new listing. She will input details about one of her most lively goats, Zygote. She decides that Zygote should be paid about $40 a day for his services, and describes him at length including his coat colouring, likes, dislikes, and Myers-Briggs personality type. She notes his breed, and marks him as a 'Cuddly Companion' because he is sweet and very well behaved. She marks that drop off is available (she owns a 2006 Toyota Land Cruiser ute) and finally lists his favourite treats as Chicken Twisties and Turkish Delight (SPECIAL OCCASIONS ONLY!) She uploads her best picture of him, and clicks 'Create Listing.'
-* Her listing of Zygote appears on the screen, and she is able to review what she wrote and edit if necessary. She can also delete the listing if she feels Zygote needs some annual leave. There is a banner at the top of the page to ensure she does not attempt to book this goat for herself (she does have forty afterall!)
+* Her listing of Zygote appears on the screen, and she is able to review what she wrote and edit if necessary. She can also delete the listing if she feels Zygote needs a sabbatical. There is a banner at the top of the page to ensure she does not attempt to book this goat for herself (she does have twenty afterall!)
 * Marge clicks the link next to Zygote's photo 'Back to all goats,' and can see a list of all goats available on Jim’s Goats. Zygote is at the top of the list because he is the most recently added. There is also a yellow star on his card to remind her that he belongs to her. This step completes Marge's user journey through the Jim's Goats app. From here, she will wait for someone to book Zygote, which will be facilitated by the administrators of Jim's Goats.
 
 
@@ -77,20 +93,47 @@ WISHLIST
 * An email function to connect vendors and customers within the app.
 
 
-
-
-8. **CMP1042-6.2**
-Provide Wireframes for your App for several different screen sizes (as required for the app)
+**R13 - Wireframes for your app**
 ![Trello Board](https://github.com/mollymadden/goats/blob/master/app/assets/images/wireframe.png?raw=true)
 
+**R14 - An ERD for your app**
+![ERD](https://github.com/mollymadden/goats/blob/master/app/assets/images/GOATS_erd.jpeg?raw=true)
 
-9. **CMP1042-6.3**
-Describe the way tasks are planned and tracked in your project
+**R15 - Explain the different high-level components (abstractions) in your app**
+
+* In terms of development, many SQL queries have been abstracted into Ruby code, such as in views/listings/index where data can be filtered. This filter function uses the ruby method 'pluck,' which in this instance is an abstraction of SQL's 'where.' This particular abstraction is for the developer's (my) convenience.
+
+* High-level abstractions for the benefit of the user allows them create, read, update, and delete data on various tables. Like in all good apps, the user does not see the functionality behind the scenes, because the code has been abstracted between SQL, Ruby, and other languages to a final graphical user interface. Using the same example as above, the index filter is abstracted to HTML by way of embedded ruby which is easily readable and understood by any user. 
+
+**R16 - Detail any third party services that your app will use**
+
+  The app uses the following third party services:
+  * Devise - a ruby gem providing authentication solution for Rails. This gem creates a full MVC for user profile based functionality.
+  * Stripe - an API allowing real world payment functionality. Implemented as a gem with javascript.
+  * Bootstrap - a CSS framework for basic styling. Implemented as a gem with SCSS.
+  * Amazon Web Services - an API providing a data storage solution located in Amazon's cloud network.
+  * Heroku - The platform on which the app is deployed. Heroku manages the database and server functionality with minimal fuss, and is free for small scale rails projects.
+  * Postgres - an open source database that marries up nicely to Heroku.
+  * Google Places API - Used in this app to provide autocomplete suggestions based on the typing of an address. 
+
+**R17 - Describe your projects models in terms of the relationships (active record associations) they have with each other**
+
+**R18 - Discuss the database relations to be implemented in your application**
+
+**R19 - Provide your database schema design**
+
+**R20 - Describe the way tasks are allocated and tracked in your project**
 ![Trello Board](https://github.com/mollymadden/goats/blob/master/app/assets/images/trello.png?raw=true)
 
 
-**Sitemap**
 
-![Sitemap](https://github.com/mollymadden/goats/blob/master/app/assets/images/jimsgoatssitemap.png?raw=true)
+
+
+
+
+
+
+
+
 
 
