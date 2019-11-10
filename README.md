@@ -81,6 +81,8 @@ WISHLIST
 
 8. **CMP1042-6.2**
 Provide Wireframes for your App for several different screen sizes (as required for the app)
+![Trello Board](https://github.com/mollymadden/goats/blob/master/app/assets/images/wireframe.png?raw=true)
+
 
 9. **CMP1042-6.3**
 Describe the way tasks are planned and tracked in your project
