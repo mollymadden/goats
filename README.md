@@ -29,8 +29,7 @@ Discuss the database relations to be implemented with reference to the ERD
 
 6. **CMP1042-4.3**
 Provide your database schema design
-
-![a pretty tiger](https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg)
+![ERD](https://github.com/mollymadden/goats/blob/master/app/assets/images/GOATS_erd.jpeg?raw=true)
 
 7. **CMP1042-6.1**
 Provide User stories for your App
@@ -85,4 +84,11 @@ Provide Wireframes for your App for several different screen sizes (as required 
 
 9. **CMP1042-6.3**
 Describe the way tasks are planned and tracked in your project
+![Trello Board](https://github.com/mollymadden/goats/blob/master/app/assets/images/trello.png?raw=true)
+
+
+**Sitemap**
+
+![Sitemap](https://github.com/mollymadden/goats/blob/master/app/assets/images/jimsgoatssitemap.png?raw=true)
+
 
