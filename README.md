@@ -12,7 +12,7 @@ For those who live in an inner suburb, there is often a clash of concerns - can 
 
 **R9 - A link (URL) to your deployed app (i.e. website)**
 
-[Jim's Goats - Heroku](jimsgoats.herokuapp.com)
+[Jim's Goats - Heroku](https://jimsgoats.herokuapp.com)
 
 **R10 - A link to your GitHub repository (repo).**
 
